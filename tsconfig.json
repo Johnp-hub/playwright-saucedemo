@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler", // <-- Cambia 'node' o 'node10' por 'bundler'
+    "esModuleInterop": true,
+    "types": ["node", "@playwright/test"],
+    "strict": true,
+    "skipLibCheck": true
+  }
+}
