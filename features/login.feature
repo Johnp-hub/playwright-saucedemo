@@ -10,15 +10,13 @@ Característica: Autenticación de Usuario
 
   @smoke @regresion
   Escenario: Inicio de sesión exitoso con credenciales válidas
-    Cuando el usuario ingresa el nombre de usuario "standard_user"
-    Y la contraseña "secret_sauce"
+    Cuando el usuario ingresa las credenciales de un "USUARIO_VÁLIDO"
     Y hace clic en el botón de ingresar
     Entonces debería ser redirigido a la página de productos
     Y debería visualizar el título de la sección "Products"
 
   @negativo
   Escenario: Intento de inicio de sesión con credenciales inválidas
-    Cuando el usuario ingresa el nombre de usuario "locked_out_user"
-    Y la contraseña "secret_sauce"
+    Cuando el usuario ingresa las credenciales de un "USUARIO_INVÁLIDO"
     Y hace clic en el botón de ingresar
     Entonces debería visualizar un mensaje de error que indica "Sorry, this user has been locked out"

@@ -32,6 +32,10 @@ jobs:
     # 4. Ejecutar los tests de Playwright
     - name: Run Playwright tests
       run: npx playwright test
+      env:
+        # Vinculamos el secreto de GitHub a una variable de entorno de la máquina
+        TEST_USER: ${{ secrets.LOGIN_USER }}
+        TEST_PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
 
     # 5. Guardar el reporte de Playwright
     - name: Upload Playwright Report

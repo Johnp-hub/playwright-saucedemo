@@ -9,15 +9,31 @@ Given('que el usuario navega a la página de inicio de sesión', async ({ page }
   await loginPage.navegar();
 });
 
-When('el usuario ingresa el nombre de usuario {string}', async ({ page }, usuario: string) => {
-  const loginPage = new LoginPage(page);
-  await loginPage.usernameInput.fill(usuario);
+When('el usuario ingresa las credenciales de un {string}', async ({ page }, rol: string) => {
+  
+  // El diccionario se queda exactamente igual (Seguro y encapsulado)
+  const diccionarioCredenciales = {
+    USUARIO_VÁLIDO: {
+      user: process.env.TEST_USER,
+      pass: process.env.TEST_PASSWORD
+    },
+    USUARIO_INVÁLIDO: {
+      user: process.env.LOCKED_OUT_USER,
+      pass: process.env.LOCKED_OUT_PASSWORD
+    }
+  };
+
+  const credenciales = diccionarioCredenciales[rol as keyof typeof diccionarioCredenciales];
+
+  if (!credenciales || !credenciales.user || !credenciales.pass) {
+    throw new Error(`❌ Error de Seguridad: Las credenciales para el rol "${rol}" no están configuradas.`);
+  }
+
+  // 2. CORRECCIÓN CLAVE: Ahora usamos 'page' directamente, NO 'this.page'
+  await page.locator('[data-test="username"]').fill(credenciales.user);
+  await page.locator('[data-test="password"]').fill(credenciales.pass);
 });
 
-When('la contraseña {string}', async ({ page }, clave: string) => {
-  const loginPage = new LoginPage(page);
-  await loginPage.passwordInput.fill(clave);
-});
 
 When('hace clic en el botón de ingresar', async ({ page }) => {
   const loginPage = new LoginPage(page);
