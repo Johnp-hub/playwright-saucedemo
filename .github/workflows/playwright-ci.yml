@@ -36,6 +36,8 @@ jobs:
         # Vinculamos el secreto de GitHub a una variable de entorno de la máquina
         TEST_USER: ${{ secrets.LOGIN_USER }}
         TEST_PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
+        LOCKED_OUT_USER: ${{ secrets.LOCKED_OUT_USER }}
+        LOCKED_OUT_PASSWORD: ${{ secrets.LOCKED_OUT_PASSWORD }}
 
     # 5. Guardar el reporte de Playwright
     - name: Upload Playwright Report
